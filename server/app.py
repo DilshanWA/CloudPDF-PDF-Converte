@@ -215,18 +215,42 @@ def split_endpoint():
     
     mode = request.form.get('mode', 'allPages').lower()
     page_range = request.form.get('page_range', '')
+    merge_custom_split = request.form.get('split_checkbox', 'false').lower() == 'true'
 
     try:
         split_files = []
-        if mode ==  'allpages':
+
+        if mode == 'allpages':
             for file in files:
                 split_files.extend(spliter.split_pdf(file))
+
         elif mode == 'custom':
             for file in files:
-                split_files.extend(spliter.split_pdf_custom_range(file, page_range))
+                split_files.extend(
+                    spliter.split_pdf_custom_range(file, page_range)
+                )
 
+            if merge_custom_split and len(split_files) > 1:
+                merged_pdf_name = "cloudpdf-merged-split-pdf.pdf"
+                merged_pdf_path = os.path.join(
+                    file_manager.upload_folder, merged_pdf_name
+                )
+
+                pdf_paths = [
+                    os.path.join(file_manager.upload_folder, pdf)
+                    for pdf in split_files
+                ]
+
+                merger.merge_pdf_paths(pdf_paths, merged_pdf_path)
+                split_files = [merged_pdf_name]
+
+        # 🔥 RESPONSE MUST BE OUTSIDE MODE CHECK
         if len(split_files) == 1:
-            pdf_url = url_for('download_file', filename=split_files[0], _external=True)
+            pdf_url = url_for(
+                'download_file',
+                filename=split_files[0],
+                _external=True
+            )
             return jsonify({
                 "message": "Single PDF split successfully",
                 "pdf_file": split_files[0],
@@ -234,24 +258,29 @@ def split_endpoint():
                 "files_count": len(files)
             })
         else:
-            pdf_paths = [os.path.join(file_manager.upload_folder, pdf) for pdf in split_files]
+            pdf_paths = [
+                os.path.join(file_manager.upload_folder, pdf)
+                for pdf in split_files
+            ]
             zip_id = uuid.uuid4().hex
             zip_filename = f"splitted_{zip_id}.zip"
-            zip_path = file_manager.create_zip(pdf_paths, zip_filename)
-            zip_url = url_for('download_zip', filename=zip_filename, _external=True)
-            print(len(split_files))
-            
+            file_manager.create_zip(pdf_paths, zip_filename)
+
+            zip_url = url_for(
+                'download_zip',
+                filename=zip_filename,
+                _external=True
+            )
+
             return jsonify({
                 "message": "Multiple PDFs split and zipped successfully",
                 "zip_file": zip_filename,
                 "zip_url": zip_url,
                 "files_count": len(split_files)
             })
-            
-            
     except Exception as e:
-        print(e)
-        return jsonify({"error": str(e)}), 500
+        print(e)    
+        
 
 
 @app.route('/download/<filename>', methods=['GET'])

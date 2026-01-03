@@ -39,6 +39,7 @@ export default function FileList({files, setFiles, operationtype, title, SelectT
   const [customRange, setCustomRange] = useState("");
   const [mode, setMode] = useState("custom");
   const [checked, setChecked] = useState(false);
+  const [splitCheckbox, setSplitCheckbox] = useState(false);
 
   const sleep = (ms: number) =>
   new Promise((resolve) => setTimeout(resolve, ms));
@@ -46,6 +47,10 @@ export default function FileList({files, setFiles, operationtype, title, SelectT
   const handleCheckboxChange = (value: boolean) => {
     setChecked(value);
   };
+
+  const handleSplitCheckboxChange = (value: boolean) => {
+    setSplitCheckbox(value);
+  }
 
   const handleOperation = useCallback(async () => {
   if (!files.length) return;
@@ -59,6 +64,7 @@ export default function FileList({files, setFiles, operationtype, title, SelectT
     formData.append("qualityOption", qualityOption);
     formData.append("password", password);
     formData.append("check_box_value", String(checked));
+    formData.append("split_checkbox", String(splitCheckbox));
     formData.append("page_range", customRange);
     formData.append("mode", mode);
     files.forEach((file) => formData.append("files", file.file));
@@ -90,7 +96,7 @@ export default function FileList({files, setFiles, operationtype, title, SelectT
   } finally {
     setIsProcessing(false);
   }
-}, [files, operationtype, qualityOption, password , checked, customRange, mode]);
+}, [files, operationtype, qualityOption, password , checked, customRange, mode, splitCheckbox]);
 
 
   const downloadFile = (url: string, originalName: string) => {
@@ -153,6 +159,7 @@ export default function FileList({files, setFiles, operationtype, title, SelectT
           onPasswordChange={setPassword}
           SelectType={SelectType}
           qualityOption={qualityOption}
+          onSplitCheckboxChange={handleSplitCheckboxChange}
           onModeChange={setMode}
           onPageRangeChange={setCustomRange}
           setQualityOption={setQualityOption}

@@ -13,11 +13,11 @@ export default function page() {
    }
 
   return (
-    <div className='bg-white w-[500px] h-auto text-center p-10 rounded-lg'> 
+    <div className='bg-white w-[500px] h-auto text-center px-5 rounded-lg'> 
         <img src="/Logo/logo.png" alt="CloudPDF Logo" className='w-23 h-15 mx-auto mb-10' />
         <h2 className='text-3xl font-bold text-center'>Welcome Back !</h2>
         <p className='mb-4'>Please login with your personal info to continue.</p>
-        <form className='mt-6 flex flex-col gap-4 mt-5' onSubmit={handleSubmit}>
+        <form className='mt-6 flex flex-col gap-4' onSubmit={handleSubmit}>
             <input type="email" placeholder='Email' className='w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500'/>
             <div className='relative'>
               <input 

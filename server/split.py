@@ -93,6 +93,4 @@ class PdfSpliter:
 
         except Exception:
             raise
-
-        finally:
-            self.file_manager.remove_file(input_pdf_path)
+                

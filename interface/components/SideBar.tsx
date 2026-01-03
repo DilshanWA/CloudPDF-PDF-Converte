@@ -54,6 +54,7 @@ interface OperationPanelProps {
   onCheckboxChange: (checked: boolean) => void;
   SelectType?: string;
   onModeChange?: (mode: string) => void;
+  onSplitCheckboxChange?: (checked: boolean) => void;
   onPageRangeChange?: (range: string) => void;
 }
 
@@ -71,13 +72,15 @@ export function Sidebar({
   onPasswordChange,
   setQualityOption,
   onCheckboxChange,
+  onSplitCheckboxChange,
   SelectType,
 }: OperationPanelProps) {
   const fileInputRef = React.useRef<HTMLInputElement>(null);
   const [isShowToggleIcon, setShowToggleIcon] = useState(false);
   const [isShowpassword, setIsShowpassword] = useState(false);
   const [password, setPassword] = useState("");
-  const [checked, setChecked] = useState(false);
+  const [checkedImageMerger, setCheckedImageMerger] = useState(false);
+  const [splitCheckbox, setSplitCheckbox] = useState(false);
   const [mode, setMode] = useState<"custom" | "allPages">("allPages");
   const [customRange, setCustomRange] = useState("");
 
@@ -121,10 +124,10 @@ export function Sidebar({
           <input
             type="checkbox"
             id="separateImagePDF"
-            checked={checked}
+            checked={checkedImageMerger}
             onChange={(e) => {
               const checked = e.target.checked;
-              setChecked(checked);
+              setCheckedImageMerger(checked);
               onCheckboxChange(checked);
             }}
             className="h-4 w-4"
@@ -184,7 +187,8 @@ export function Sidebar({
             <option value="high">High (better quality, larger size)</option>
           </select>
         </div>
-      ) : operationtype === "split" && files.length > 0 ? (
+      ) : 
+      operationtype === "split" && files.length > 0 ? (
         <>
           <div className="mb-6">
             <div>
@@ -229,7 +233,16 @@ export function Sidebar({
                     required={mode === "custom"}
                   />
                   <label htmlFor="" className="mb-4 flex items-center gap-2 text-sm font-medium mt-3 text-gray-600">
-                    <input type="checkbox" name="" id="" />
+                    <input 
+                    type="checkbox"
+                    id="Merge_custom_split_pdf"
+                    checked={splitCheckbox}
+                    onChange = {(e) =>{
+                      const checkedValue = e.target.checked;
+                      setSplitCheckbox(checkedValue);
+                      onSplitCheckboxChange?.(checkedValue);
+                    }}
+                     />
                      Marge Custome Pages into a single PDF
                   </label>
                 </div>

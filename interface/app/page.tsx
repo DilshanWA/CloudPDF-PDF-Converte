@@ -10,7 +10,7 @@ export default function Page() {
         className="container flex flex-col text-black items-center mx-auto px-6 pt-20 pb-20"
       >
         <div className="mb-10">
-          <h1 className="text-6xl text-center font-bold md:text-5xl sm:text-3xl leading-tight">
+          <h1 className="text-5xl text-center font-bold md:text-6xl leading-tight">
             Convert Your Any File In to <br />
             PDF With
             <span className="text-red-500"> CloudPDF.</span>
