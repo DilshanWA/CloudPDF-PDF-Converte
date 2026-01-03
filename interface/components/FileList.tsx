@@ -22,7 +22,7 @@ import {
 interface FileListProps {
   files: UploadedFile[];
   setFiles: React.Dispatch<React.SetStateAction<UploadedFile[]>>;
-  operationtype: "convert" | "merge" | "compress" | "split" | "protect";
+  operationtype: "convert" | "merge" | "compress" | "split" | "protect" | "imageconverter";
   title: string;
   SelectType: string;
   accept: string;
@@ -36,10 +36,16 @@ export default function FileList({files, setFiles, operationtype, title, SelectT
   const [downloadData, setDownloadData] = useState<{url: string;name: string;} | null>(null);
   const [qualityOption, setQualityOption] =useState<'low' | 'medium' | 'high'>('medium')
   const [password, setPassword] = useState("");
+  const [customRange, setCustomRange] = useState("");
+  const [mode, setMode] = useState("custom");
+  const [checked, setChecked] = useState(false);
 
   const sleep = (ms: number) =>
   new Promise((resolve) => setTimeout(resolve, ms));
 
+  const handleCheckboxChange = (value: boolean) => {
+    setChecked(value);
+  };
 
   const handleOperation = useCallback(async () => {
   if (!files.length) return;
@@ -52,16 +58,17 @@ export default function FileList({files, setFiles, operationtype, title, SelectT
     formData.append("operationType", operationtype);
     formData.append("qualityOption", qualityOption);
     formData.append("password", password);
-
+    formData.append("check_box_value", String(checked));
+    formData.append("page_range", customRange);
+    formData.append("mode", mode);
     files.forEach((file) => formData.append("files", file.file));
 
-    // ⏳ Fake loader (5s) + API call in parallel
     const [response] = await Promise.all([
       fetch("/api/endpoint", {
         method: "POST",
         body: formData,
       }),
-      sleep(5000),
+      sleep(3000),
     ]);
 
     if (!response.ok) {
@@ -74,7 +81,7 @@ export default function FileList({files, setFiles, operationtype, title, SelectT
     if (data.files_count === 1 || data.pdfUrl) {
       downloadFile(data.pdfUrl, files[0].file.name);
       setDownloadData({ url: data.pdfUrl, name: files[0].file.name });
-    } else if (files.length > 1 && data.zipUrl) {
+    } else if (data.files_count > 1 && data.zipUrl) {
       downloadFile(data.zipUrl, "files.zip");
       setDownloadData({ url: data.zipUrl, name: "files.zip" });
     }
@@ -83,7 +90,7 @@ export default function FileList({files, setFiles, operationtype, title, SelectT
   } finally {
     setIsProcessing(false);
   }
-}, [files, operationtype, qualityOption, password]);
+}, [files, operationtype, qualityOption, password , checked, customRange, mode]);
 
 
   const downloadFile = (url: string, originalName: string) => {
@@ -141,10 +148,13 @@ export default function FileList({files, setFiles, operationtype, title, SelectT
           onAddMoreFilesClick={handleAddMoreFiles}
           operationtype={operationtype}
           accept={accept}
+          onCheckboxChange={handleCheckboxChange}
           title={title}
           onPasswordChange={setPassword}
           SelectType={SelectType}
           qualityOption={qualityOption}
+          onModeChange={setMode}
+          onPageRangeChange={setCustomRange}
           setQualityOption={setQualityOption}
           isProcessing={isProcessing}
           onOperationClick={handleOperation}

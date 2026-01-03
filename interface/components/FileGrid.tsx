@@ -21,7 +21,7 @@ export function FileGrid({ files, SelectType, onRemove, isSortable }: FileGridPr
        <div className="w-full flex max-w-5xl grid grid-cols-3 gap-4 mt-20 md:grid-cols-4 lg:grid-cols-5">
           {files.map((file) => (
             isSortable ? (
-              <SortableFileItem key={file.id} id={file.id} onRemove={onRemove}>
+              <SortableFileItem key={file.id} id={file.id}>
                 <FileCard fileData={file} onRemove={onRemove} selectedFileType={SelectType} />
               </SortableFileItem>
             ) : (

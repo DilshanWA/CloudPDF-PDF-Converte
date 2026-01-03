@@ -49,6 +49,9 @@ export default function DownloadResult({
               {operationType === "protect"
               ? " Your PDF has been protected !"
               : ""}
+              {operationType === "imageconverter"
+              ? `Your ${SelectType} has been converted!`
+              : ""}
           </h2>
           <p className="text-sm text-gray-500 mt-1">
             {description}

@@ -1,4 +1,7 @@
 
+'use client';
+import React from "react";
+
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 
@@ -11,11 +14,11 @@ export default function AuthLayout({
   return (
     <div className="w-screen h-screen fixed top-0 z-50 bg-white border-b border-gray-200 shadow-sm">
         <div className="flex h-screen flex-col md:flex-row w-full">
-            <div className="relative flex-1 h-screen bg-gray-300">
+          {/* <div className="relative flex-1 h-screen bg-gray-300">
                 <img src="/login-signup/office-girl.jpg" alt="Auth Background" className="w-full h-full object-cover opacity-90"/>
                  
-            </div>
-            <div className="flex-2 h-screen flex items-center justify-center px-4 py-3">
+            </div>*/} 
+            <div className="mx-auto flex h-screen flex items-center justify-center px-4 py-3">
                 {children}
             </div>
 

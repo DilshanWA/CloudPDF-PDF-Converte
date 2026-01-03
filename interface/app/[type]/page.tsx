@@ -32,7 +32,7 @@ const fileTypeConfig =  {
     },
     image_to_pdf: {
         title: "Image to PDF",
-        optype: 'convert',
+        optype: 'imageconverter',
         description: "Transform your images into PDF format quickly and conveniently.",
         accept: ".jpg,.jpeg,.png,.bmp,.tiff",
         SelectType: 'Image',
