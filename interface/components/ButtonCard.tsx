@@ -7,51 +7,51 @@ const ButtonTitle = [
         title: "Word to PDF",
         description: "Convert Word documents to PDF format quickly and easily.",
         link: "/word_to_pdf",
-        image: '/icons/word.png'
+        image: '/Icons/word.png'
     },
     {
         title: "Marge PDF",
         description: "Combine multiple PDF files into a single document effortlessly.",
         link: "/merge_pdf",
-        image: "/icons/pdf.png"
+        image: "/Icons/pdf.png"
 
     },
     {
         title: "Compress PDF",
         description: "Reduce the file size of your PDFs without compromising quality.",
         link: "/compress_pdf",
-        image: "/icons/arrows.png"
+        image: "/Icons/arrows.png"
     },
     {
         title: "Image to PDF",
         description: "Transform images into PDF format quickly and conveniently.",
         link: "/image_to_pdf",
-        image: "/icons/image.png"
+        image: "/Icons/image.png"
        
     },
     {
         title : "PowerPoint to PDF",
         description: "Convert PowerPoint presentations to PDF format seamlessly.",
         link: "/powerpoint_to_pdf",
-        image: "/icons/powerpoint.png"
+        image: "/Icons/powerpoint.png"
     },
     {
         title: "Protect PDF",
         description: "Easily protect your PDF files with passwords and permissions.",
         link: "/protect_pdf",
-        image: "/icons/unlock.png"
+        image: "/Icons/unlock.png"
     },
     {
         title: "Excel to PDF",
         description: "Convert Excel spreadsheets to PDF format with ease.",
         link: "/excel_to_pdf",
-        image: "/icons/excel.png"
+        image: "/Icons/excel.png"
     },
     {
         title: "Split PDF",
         description: "Easily split your PDF files into smaller, manageable documents.",
         link: "/split_pdf",
-        image: "/icons/unlock.png"
+        image: "/Icons/unlock.png"
     }
 ]
 
