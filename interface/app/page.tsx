@@ -13,7 +13,7 @@ export default function Page() {
           <h1 className="text-5xl text-center font-bold md:text-6xl leading-tight">
             Convert Your Any File In to <br />
             PDF With
-            <span className="text-red-500"> CloudPDF.</span>
+            <span className="text-primary"> CloudPDF.</span>
           </h1>
 
           <p className="text-lg mt-4 text-gray-600 text-center">

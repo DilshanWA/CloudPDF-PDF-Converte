@@ -1,6 +1,8 @@
 'use client';
 
 import React, { useState } from "react";
+import { UploadedFiles } from "./FileBainder";
+import { PanelRightClose  } from 'lucide-react';
 
 interface OperationDetails {
   description: string;
@@ -40,14 +42,13 @@ export const operationDetails: Record<
 };
 
 interface OperationPanelProps {
-  files: File[];
+  files: UploadedFiles[];
   operationtype: "convert" | "merge" | "compress" | "split" | "protect" | "imageconverter";
   password?: string;
   title: string;
   onPasswordChange: (password: string) => void;
   accept: string;
   isProcessing: boolean;
-  onAddMoreFilesClick: (files: FileList) => void;
   onOperationClick: () => void;
   qualityOption: "low" | "medium" | "high";
   setQualityOption: (v: "low" | "medium" | "high") => void;
@@ -56,6 +57,8 @@ interface OperationPanelProps {
   onModeChange?: (mode: string) => void;
   onSplitCheckboxChange?: (checked: boolean) => void;
   onPageRangeChange?: (range: string) => void;
+  isMobileOpen?: boolean;
+  onCloseMobile: () => void;
 }
 
 export function Sidebar({
@@ -63,9 +66,10 @@ export function Sidebar({
   operationtype,
   title,
   isProcessing,
-  onAddMoreFilesClick,
   onOperationClick,
   accept,
+  isMobileOpen,
+  onCloseMobile,
   onModeChange,
   onPageRangeChange,
   qualityOption,
@@ -75,7 +79,6 @@ export function Sidebar({
   onSplitCheckboxChange,
   SelectType,
 }: OperationPanelProps) {
-  const fileInputRef = React.useRef<HTMLInputElement>(null);
   const [isShowToggleIcon, setShowToggleIcon] = useState(false);
   const [isShowpassword, setIsShowpassword] = useState(false);
   const [password, setPassword] = useState("");
@@ -84,11 +87,8 @@ export function Sidebar({
   const [mode, setMode] = useState<"custom" | "allPages">("allPages");
   const [customRange, setCustomRange] = useState("");
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!e.target.files) return;
-    onAddMoreFilesClick(e.target.files);
-    e.target.value = "";
-  };
+
+
 
   // Determine if button should be disabled
   const isButtonDisabled = () => {
@@ -108,32 +108,56 @@ export function Sidebar({
   };
 
   return (
-    <aside className="w-full md:w-[420px] p-6 flex flex-col bg-white shadow-lg py-25">
-      <h2 className="text-3xl font-bold mb-8 mx-auto">{title}</h2>
+     <>
+      {isMobileOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 z-40 md:hidden"
+          onClick={onCloseMobile}
+        />
+      )}
 
-      <p className="mb-10 bg-red-100 p-2 rounded text-gray-700 font-regular text-sm">
+      {/* Sidebar */}
+      <div
+        className={`
+          bg-white shadow-lg flex flex-col md:p-1
+          md:static md:w-full md:h-full md:block
+          fixed top-0 right-0 h-full w-[85%] max-w-full z-50
+          transform transition-transform duration-300
+          ${isMobileOpen ? "translate-x-0" : "translate-x-full"}
+          md:translate-x-0
+        `}
+      >
+
+    
+      
+      <h2 className="mt-25 text-3xl text-center font-bold md:mt-20  mx-auto">{title}</h2>
+      <hr className="my-6 border-border opacity-15 w-full" />
+    
+
+    <div className="p-6">
+      <p className="mb-10 bg-primary/30 p-5 rounded text-gray-700 font-regular text-sm">
         {operationDetails[operationtype].description}
       </p>
 
       {/* Checkbox for image converter */}
-      {SelectType === "Image" && (
-        <label
-          htmlFor="separateImagePDF"
-          className="mb-4 flex items-center gap-2 text-sm font-medium  text-gray-600"
-        >
-          <input
-            type="checkbox"
-            id="separateImagePDF"
-            checked={checkedImageMerger}
-            onChange={(e) => {
-              const checked = e.target.checked;
-              setCheckedImageMerger(checked);
-              onCheckboxChange(checked);
-            }}
-            className="h-4 w-4"
-          />
-          Merge images into a single PDF file
-        </label>
+      {operationtype === "imageconverter" && (
+        <div className="mb-6">
+          <label className="flex items-center space-x-3">
+            <input
+              type="checkbox"
+              checked={checkedImageMerger}
+              onChange={(e) => {
+                const isChecked = e.target.checked;
+                setCheckedImageMerger(isChecked);
+                onCheckboxChange(isChecked);
+              }}
+              className="h-4 w-4 text-primary border-gray-300 rounded"
+            />
+            <span className="text-gray-700 font-medium text-md">
+              Merge all images
+            </span>
+          </label>
+        </div>
       )}
 
       {/* Password input for protect operation */}
@@ -251,33 +275,18 @@ export function Sidebar({
           </div>
         </>
       ) : (
-        <button
-          type="button"
-          onClick={() => fileInputRef.current?.click()}
-          className="flex justify-center items-center gap-2 py-4 bg-gray-200 rounded font-semibold cursor-pointer text-black transition-colors focus:outline-none"
-        >
-          Add More Files
-        </button>
+        null
       )}
-
-      <input
-        ref={fileInputRef}
-        type="file"
-        multiple
-        accept={accept}
-        className="hidden"
-        onChange={handleFileChange}
-      />
 
       <button
         type="button"
         onClick=
          {operationtype === "protect" && password.trim() === "" ? () => alert("Please enter a password.") : onOperationClick}
         disabled={isButtonDisabled()}
-        className={`w-full mt-6 py-4 rounded font-semibold cursor-pointer text-white transition-colors focus:outline-none ${
+        className={`w-full  py-4 rounded font-semibold cursor-pointer text-white transition-colors focus:outline-none ${
           isButtonDisabled()
             ? "bg-red-300 cursor-not-allowed"
-            : "bg-red-600 hover:bg-red-700"
+            : "bg-primary hover:bg-primary-dark"
         }`}
         aria-busy={isProcessing}
       >
@@ -285,6 +294,32 @@ export function Sidebar({
           ? `${operationDetails[operationtype].buttonLabel}...`
           : operationDetails[operationtype].buttonLabel}
       </button>
-    </aside>
+    </div>
+  </div>
+
+    {/* Mobile Bottom Bar */}
+    {!isMobileOpen && (
+        <div className="md:hidden fixed bottom-0 left-0 w-full bg-white p-4  flex justify-center items-center back">
+        <button
+          type="button"
+          onClick=
+          {operationtype === "protect" && password.trim() === "" ? () => alert("Please enter a password.") : onOperationClick}
+          disabled={isButtonDisabled()}
+          className={`w-full mt-6 py-4 rounded font-semibold cursor-pointer text-white transition-colors focus:outline-none ${
+            isButtonDisabled()
+              ? "bg-red-300 cursor-not-allowed"
+              : "bg-primary hover:bg-primary-dark"
+          }`}
+          aria-busy={isProcessing}
+        >
+          {isProcessing
+            ? `${operationDetails[operationtype].buttonLabel}...`
+            : operationDetails[operationtype].buttonLabel}
+        </button>
+      
+      </div>
+    )}
+    </>
+        
   );
 }

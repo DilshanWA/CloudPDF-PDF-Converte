@@ -4,7 +4,11 @@ import React from 'react'
 import { ArrowLeft  } from "lucide-react";
 import { useRouter } from 'next/navigation';
 
-export default function Servererror() {
+interface ServererrorProps {
+  errorType?: "server" | "System Down" | "normal";
+}
+
+export default function Servererror({ errorType }: ServererrorProps) {
   const router = useRouter();
 
   const goBackHome = () => {

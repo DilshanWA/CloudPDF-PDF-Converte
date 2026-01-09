@@ -83,8 +83,8 @@ export default async function ConverterPage({params}: {params: Promise<{type: st
     </div>
   }
   return (
-    <div className='w-full'>
-      <div className='min-h-screen max-w-4xl mx-auto '> 
+    <div className='w-full '>
+      <div className='min-h-screen max-w-4xl mx-auto'> 
         <main className='container flex flex-col text-black font-regular items-center  px-6 mt-20'> 
           <div className='mx-auto max-w-6xl w-full mb-10'>
             <FileBinder
@@ -93,6 +93,7 @@ export default async function ConverterPage({params}: {params: Promise<{type: st
               optype={fileTypeConfig[type].optype}
               title={fileTypeConfig[type].title}
               accept={fileTypeConfig[type].accept}
+              touch-manipulation = "true"
             />
           </div>
         </main>

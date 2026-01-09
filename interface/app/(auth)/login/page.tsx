@@ -13,12 +13,12 @@ export default function page() {
    }
 
   return (
-    <div className='bg-white w-[500px] h-auto text-center px-5 rounded-lg'> 
+    <div className='bg-white w-[500px] h-auto text-center px-5 rounded-lg top-0'> 
         <img src="/Logo/logo.png" alt="CloudPDF Logo" className='w-23 h-15 mx-auto mb-10' />
         <h2 className='text-3xl font-bold text-center'>Welcome Back !</h2>
         <p className='mb-4'>Please login with your personal info to continue.</p>
         <form className='mt-6 flex flex-col gap-4' onSubmit={handleSubmit}>
-            <input type="email" placeholder='Email' className='w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500'/>
+            <input type="email" placeholder='Email' className='w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary'/>
             <div className='relative'>
               <input 
                 type= {isShowpassword ? 'password' : 'text'}
@@ -36,7 +36,7 @@ export default function page() {
                   }
 
                 }}
-                className='w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500'
+                className='w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary'
               />
               {isToggleVisible && (
                 <span
@@ -44,18 +44,18 @@ export default function page() {
                   onClick={() => setVisiblePassword(!isShowpassword)}
                 >
                   {isShowpassword ? (
-                    <Eye />
+                    <Eye className='text-primary'/>
                   ) : (
-                    <EyeOff />
+                    <EyeOff className='text-primary'/>
                   )}
                 </span>
               )}
             </div>
   
             <p className='text-left'><a href="/forgot-password" className='text-black text-sm'>Forgot Password?</a></p>
-            <button type="submit" className='w-full cursor-pointer bg-red-500 text-white py-3 rounded-md hover:bg-red-600 transition'>Login</button>
+            <button type="submit" className='w-full cursor-pointer bg-primary text-white py-3 rounded-md hover:bg-primary-dark cursor-pointer transition'>Login</button>
         </form>
-        <p className='mt-4'>Don't have an account? <a href="/signup" className='text-red-500 font-bold'>Sign Up</a></p>
+        <p className='mt-4'>Don't have an account? <a href="/signup" className='text-primary font-bold'>Sign Up</a></p>
 
     </div>
   )

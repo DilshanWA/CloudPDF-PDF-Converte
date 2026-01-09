@@ -29,9 +29,9 @@ export default function DownloadResult({
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-gray-100 flex justify-center p-6 mt-20">
-      <div className="w-[420px] text-center space-y-6">
-        <CheckCircle className="mx-auto h-14 w-14 text-red-600" />
+    <div className="fixed inset-0 z-50 bg-gray-100 flex justify-center p-6">
+      <div className="w-[420px] text-center space-y-6 mt-20">
+        <CheckCircle className="mx-auto h-14 w-14 text-primary" />
         <div>
           <h2 className="text-2xl font-semibold text-gray-900">
            {operationType === "convert"
@@ -59,7 +59,7 @@ export default function DownloadResult({
         </div>
         <button
           onClick={handleDownload}
-          className="w-full flex items-center cursor-pointer justify-center gap-2 bg-red-500 hover:bg-red-700 text-white text- py-5 rounded-lg font-bold transition"
+          className="w-full flex items-center  cursor-pointer justify-center gap-2 bg-primary hover:bg-primary-dark text-white text- py-5 rounded-lg font-bold transition"
         >
           <Download size={25} />
           Download File

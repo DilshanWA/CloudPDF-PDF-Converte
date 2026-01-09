@@ -1,5 +1,6 @@
 'use client'
 import React,{useState,useRef, useCallback} from 'react'
+import { nanoid } from 'nanoid';
 import FileUpload from './FileUpload';
 import FileList from './FileList';
 import { title } from 'process';
@@ -8,7 +9,6 @@ export interface UploadedFiles {
     id: string;
     file: File;
     SelectType: string;
-    status: 'Ready' | 'Converting' | 'completed' | 'error';
     pdfUrl?: string;
     zipUrl?: string;
     errMessage?: string;
@@ -36,7 +36,7 @@ export default function FileBainder({
 
     const handleFilesAdded = useCallback((newFiles: File[]) => {
       const uploaded = newFiles.map(file => ({
-        id: crypto.randomUUID(),
+        id: nanoid(),
         file,
         SelectType,
         status: 'Ready' as const,

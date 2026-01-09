@@ -21,15 +21,15 @@ export default function Preview({ selectedFileType, file }: PreviewProps) {
   }, [selectedFileType, file]);
 
   return (
-    <div className="w-full h-full flex items-center justify-center">
+    <div className="w-[180px] h-[160px] flex items-center justify-center">
       {/* IMAGE PREVIEW */}
       {selectedFileType === "Image" && imageSrc && (
         <img
           src={imageSrc}
           alt="Preview"
           className="
-            max-w-full
-            max-h-full
+            w-auto
+            w-auto
             object-contain
             rounded-sm
           "

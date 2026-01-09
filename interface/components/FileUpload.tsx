@@ -78,11 +78,11 @@ export default function FileUpload(props: FileUploadProps) {
         <p className='text-gray-600 text-lg md:text-xl'>{props.discription}</p>
       </div>
      <div
-    onDragEnter = {handleDragEvents}
-    onDragOver = {handleDragEvents}
-    onDragLeave = {handleDragEvents}
-    onDrop={handleDropEvent}
-      className={`border-2 border-dashed rounded-lg p-20 text-center cursor-pointer 
+        onDragEnter = {handleDragEvents}
+        onDragOver = {handleDragEvents}
+        onDragLeave = {handleDragEvents}
+        onDrop={handleDropEvent}
+      className={`hidden md:block border-2 border-dashed rounded-lg p-20 text-center cursor-pointer 
       ${isDragging ? 'border-red-500 bg-red-50' : 'border-gray-300 bg-white'}`}>
 
         <label
@@ -110,7 +110,7 @@ export default function FileUpload(props: FileUploadProps) {
           disabled={props.disabled}
         />
         <button
-         className='px-4 py-2 mt-4 bg-red-500 rounded-lg cursor-pointer text-white font-bold rounded hover:bg-red-600 disabled:opacity-50'
+         className='px-4 py-2 mt-4 bg-primary rounded-lg cursor-pointer text-white font-bold rounded hover:bg-primary-dark disabled:opacity-50'
          onClick={handleClickUpload}
          >
           Select {props.SelectType}
@@ -122,6 +122,12 @@ export default function FileUpload(props: FileUploadProps) {
         }
         </div>
        </label>
+    </div>
+    <div className='w-full bg-green-500 rounded-lg max-w-md mx-auto md:hidden  left-0 right-0'>
+      <button className='w-full h-[70px] bg-primary rounded-lg cursor-pointer text-xl text-white font-bold rounded hover:bg-primary-dark disabled:opacity-50'
+       onClick={handleClickUpload}>
+        Upload Files
+      </button>
     </div>
     </>
   )
