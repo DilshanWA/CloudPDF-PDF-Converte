@@ -57,7 +57,7 @@ const ButtonTitle = [
 
 export default function ButtonCard() {
   return (
-    <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl  md:px-4 mx-auto top-0'>
+    <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-[1400px]  md:px-4 mx-auto top-0'>
         {ButtonTitle.map((buttons, index) => (
         <Link href={buttons.link} key={index} className="block">
             <div className="group h-full rounded-2xl border border-gray-200 bg-white py-8 px-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg cursor-pointer">

@@ -45,7 +45,6 @@ export default function FileList({files,setFiles,SelectType,accept,onRemove,titl
       formData.append("qualityOption", qualityOption);
       formData.append("password", password);
       formData.append("check_box_value", String(checked));
-      console.log("Checked value:", checked);
       formData.append("split_checkbox", String(splitCheckbox));
       formData.append("page_range", customRange);
       formData.append("mode", mode);

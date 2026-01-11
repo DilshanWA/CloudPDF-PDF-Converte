@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Download, CheckCircle, Plus } from "lucide-react";
+import ThankyouCard from "./ui/ThankyouCard";
 
 interface DownloadResultProps {
   title?: string;
@@ -19,6 +20,8 @@ export default function DownloadResult({
   operationType,
   onClose,
 }: DownloadResultProps) {
+  const [isgoodtoDownload, setIsgoodtoDownload] = React.useState(false);
+
   const handleDownload = () => {
     const link = document.createElement("a");
     link.href = fileUrl;
@@ -27,6 +30,13 @@ export default function DownloadResult({
     link.click();
     document.body.removeChild(link);
   };
+
+  useEffect(() => {
+    setTimeout(() => {
+        setIsgoodtoDownload(true);
+    },3000)
+  })
+
 
   return (
     <div className="fixed inset-0 z-50 bg-gray-100 flex justify-center p-6">
@@ -72,9 +82,9 @@ export default function DownloadResult({
             Close
           </button>
         )}
-       */}
-       
+       */} 
       </div>
+       {isgoodtoDownload && <ThankyouCard />}
     </div>
   );
 }
