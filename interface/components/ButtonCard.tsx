@@ -60,7 +60,7 @@ export default function ButtonCard() {
     <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-[1400px]  md:px-4 mx-auto top-0'>
         {ButtonTitle.map((buttons, index) => (
         <Link href={buttons.link} key={index} className="block">
-            <div className="group h-full rounded-2xl border border-gray-200 bg-white py-8 px-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg cursor-pointer">
+            <div className="group h-full rounded-2xl border border-gray-200 bg-white py-8 px-8  hover:border-black/30 cursor-pointer">
             <img src={buttons.image} className="w-[50px] h-[50px] object-cover rounded-lg mb-4"/>
             <h3 className="text-lg font-semibold text-gray-900 mb-2  transition-colors">{buttons.title}</h3>
             <p className="text-sm text-gray-600 leading-relaxed">{buttons.description}</p>
