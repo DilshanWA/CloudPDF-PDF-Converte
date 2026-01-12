@@ -41,7 +41,7 @@ export default function Preview({ selectedFileType, file }: PreviewProps) {
       {/* PDF ICON */}
       {selectedFileType === "PDF" && (
         <img
-          src="/icons/pdf.png"
+          src="/Icons/pdf.png"
           alt="PDF Icon"
           className="w-20 h-20 object-contain"
         />
@@ -50,7 +50,7 @@ export default function Preview({ selectedFileType, file }: PreviewProps) {
       {/* WORD ICON */}
       {selectedFileType === "Word" && (
         <img
-          src="/icons/word.png"
+          src="/Icons/word.png"
           alt="Word Icon"
           className="w-12 h-12 object-contain"
         />
