@@ -24,10 +24,6 @@ export default function Page() {
         </div>
         <ButtonCard/>
       </div>
-      <div>
-        <Features/>
-        <HowItWorks/>
-      </div>
     </div>
   )
 }

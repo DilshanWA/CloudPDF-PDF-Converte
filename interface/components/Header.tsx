@@ -24,7 +24,7 @@ export default function Header() {
         </Link>
 
         
-        <nav className="hidden lg:flex items-center gap-8 text-sm  text-gray-500 relative">
+        <nav className="hidden lg:flex items-center gap-8 text-sm  text-black font-Arial font-semibold relative">
           {/* Dropdown Item */}
           <div className="relative group">
             <Link
@@ -62,7 +62,7 @@ export default function Header() {
         </nav>
 
 
-     
+       {/*
         <div className="flex items-center gap-2">
           <Link href="/login">
             <button className="px-4 cursor-pointer py-2 text-sm font-bold text-gray-700 hover:text-primary transition">
@@ -76,6 +76,7 @@ export default function Header() {
             </button>
           </Link>
         </div>
+        * */}
       </div>
     </div>
   </header>

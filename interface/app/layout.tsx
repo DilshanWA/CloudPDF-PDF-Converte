@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   keywords: ["PDF", "convert", "online", "documents", "images", "free tool", "ilovepdf.com", "word to pdf", "jpg to pdf", "png to pdf", "pdf converter"],
   authors: [{ name: "CloudPDF", url: "https://cloudpdf.com" }],
   icons: {
-    icon: "/logo/logo.png",
+    icon: "CloudPDF",
     shortcut: "/favicon-16x16.png",
     apple: "/apple-touch-icon.png",
     other: [

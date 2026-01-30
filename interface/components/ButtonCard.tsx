@@ -51,7 +51,7 @@ const ButtonTitle = [
         title: "Split PDF",
         description: "Easily split your PDF files into smaller, manageable documents.",
         link: "/split_pdf",
-        image: "/Icons/unlock.png"
+        image: "/Icons/split.png"
     }
 ]
 
